@@ -45,8 +45,7 @@ class Users extends Api_configuration
                 'slug' => $slug
             ];
         } else {
-            http_response_code(400);
-            return ['message' => "Error creating user"];
+            return false;
         }
     }
 
@@ -85,7 +84,7 @@ class Users extends Api_configuration
         }
     }
 
-    public function read_by_id(
+    private function read_by_id(
         int $id
     ) {
         $sql = 'SELECT `id`, `name`, `email`, `position`, `slug` FROM `users` WHERE `id` = "' . $id . '"';
@@ -148,9 +147,7 @@ class Users extends Api_configuration
         if ($old_user) {
             $sql = 'DELETE FROM `users` WHERE `slug` = "' . $slug . '"';
             if ($this->db_delete($sql)) {
-                return [
-                    'old_user' => $old_user
-                ];
+                return $old_user;
             } else {
                 return false;
             }

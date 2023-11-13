@@ -69,7 +69,7 @@ class Complaints extends API_configuration
         if ($this->db_num_rows($get_complaints) > 0) {
             $complaints = $this->db_object($get_complaints);
             $complaints->id = (int) $complaints->id;
-            $complaints->user_id = (int) $complaints->user_id;
+            $complaints->userId = (int) $complaints->user_id;
             return $complaints;
         } else {
             return [];
@@ -84,6 +84,7 @@ class Complaints extends API_configuration
         if ($this->db_num_rows($get_complaints) > 0) {
             $complaints = $this->db_object($get_complaints);
             $complaints->id = (int) $complaints->id;
+            $complaints->userId = (int) $complaints->userId;
             return $complaints;
         } else {
             return [];

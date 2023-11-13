@@ -54,11 +54,7 @@ if (isset($_GET['url'])) {
 
             if (!isset($url[1])) { //read
                 if (!$api->validate_permissions('users.read')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error read users or without permission'
-                    ]);
-                    exit;
+                    http_response_code(401);
                 }
                 $users->user_id = $user;
                 $response = $users->read(
@@ -76,10 +72,7 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'create') {
                 if (!$api->validate_permissions('users.create')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error create user or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $response = $users->create(
@@ -105,10 +98,7 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'update') {
                 if (!$api->validate_permissions('users.update')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error update user or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $response = $users->update(
@@ -134,10 +124,7 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'delete') {
                 if (!$api->validate_permissions('users.delete')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error delete user or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $response = $users->delete(
@@ -174,12 +161,9 @@ if (isset($_GET['url'])) {
             require_once 'src/services/complaints.php';
             $complaints = new Complaints();
 
-            if (!isset($url[1])) { //read
+            if (!isset($url[1])) {
                 if (!$api->validate_permissions('complaints.read')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error read complaints or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $complaints->user_id = $user;
@@ -198,10 +182,7 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'create') {
                 if (!$api->validate_permissions('complaints.create')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error create order or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $response = $complaints->create(
@@ -225,10 +206,7 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'update') {
                 if (!$api->validate_permissions('complaints.update')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error update complaint or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
                 $response = $complaints->update(
@@ -253,13 +231,10 @@ if (isset($_GET['url'])) {
                 }
             } else if ($url[1] == 'delete') {
                 if (!$api->validate_permissions('complaints.delete')) {
-                    http_response_code(400);
-                    echo json_encode([
-                        'message' => 'Error delete complaint or without permission'
-                    ]);
+                    http_response_code(401);
                     exit;
                 }
-                $response = $users->delete(
+                $response = $complaints->delete(
                     addslashes($url[2])
                 );
                 if ($response) {
